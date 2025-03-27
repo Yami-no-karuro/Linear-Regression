@@ -13,7 +13,7 @@ Linear regression is a type of **Supervised Learning Algorithm** that learns fro
 In this example we'll take a look at **Simple Linear Regression**, the simplest form of **Linear Regression**.  
 This form involves only one independent variable and one dependent variable.
 
-For example, consider a scenario where a farmer wants to predict the yield of a crop based on the amount of fertilizer used.  
+For example, let's consider a scenario where a farmer wants to predict the yield of a crop based on the amount of fertilizer used.  
 By analyzing past data, the farmer notices that increasing the amount of fertilizer generally leads to higher crop yields, up to a certain point.
 
 Using **Simple Linear Regression**, we can establish the mathematical relationship `Y = mX + b` where:
@@ -121,3 +121,8 @@ To approximate the derivates in the `weight_grad()` and the `bias_grad()` functi
 
 Using **Gradients**, we update the **weight** and **bias** in each training step by the a small number, called the **Training Rate**.  
 The **Traning Rate** is a small constant that controls how big each update step is.
+
+By iteratively adjusting the **weight** and **bias** based on the computed gradients, we minimize the ``cost()`` function and improve the accuracy of our predictions.  
+This process is repeated for multiple training steps until the model converges to an optimal solution, meaning further adjustments result in minimal improvements.
+
+Once trained, the **Simple Linear Regression** Model can predict unknown values based on new input data.
