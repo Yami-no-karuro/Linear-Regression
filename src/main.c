@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-float X[] = {2, 4, 6, 8};
-float Y[] = {20, 40, 60, 80};
+float X[] = {1, 2, 3, 4, 5};
+float Y[] = {5, 10, 15, 20, 25};
 
 float weight = 0;
 float bias = 0;
