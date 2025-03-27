@@ -36,35 +36,42 @@ float cost(float input, float label, float weight, float bias)
 }
 
 /**
- * The gradient of the weight is the partial derivative of the cost function with respect to the weight.
- * It indicates how much the weight should be adjusted to reduce the cost.
+ * Approximates the derivative of the cost function with respect to weight using the Finite Difference method.
  *
  * @param input - The input value, X.
  * @param label - The label value, Y.
+ * @param weight - The current weight value, W.
+ * @param bias - The current bias value, B.
+ * @param h - A small value for approximation.
  */
-float weight_grad(float input, float label) 
+float weight_grad(float input, float label, float weight, float bias, float h) 
 {
-    float predicted = predict(input, weight, bias);
-    return (predicted - label) * input;
+    float cost1 = cost(input, label, weight + h, bias);
+    float cost2 = cost(input, label, weight, bias);
+    return (cost1 - cost2) / h;
 }
 
 /**
- * The gradient of the bias is the partial derivative of the cost function with respect to the bias.
- * It indicates how much the bias should be adjusted to reduce the cost.
- * 
+ * Approximates the derivative of the cost function with respect to bias using the Finite Difference method.
+ *
  * @param input - The input value, X.
  * @param label - The label value, Y.
+ * @param weight - The current weight value, W.
+ * @param bias - The current bias value, B.
+ * @param h - A small value for approximation.
  */
-float bias_grad(float input, float label)
+float bias_grad(float input, float label, float weight, float bias, float h)
 {
-    float predicted = predict(input, weight, bias);
-    return predicted - label;
+    float cost1 = cost(input, label, weight, bias + h);
+    float cost2 = cost(input, label, weight, bias);
+    return (cost1 - cost2) / h;
 }
 
 int main() 
 {
     int epoch = 10000;
     float learning_rate = 1e-4;
+    float h = 1e-4;
     int size = sizeof(X) / sizeof(X[0]);
 
     float loss = 0;
@@ -74,8 +81,8 @@ int main()
     for (size_t i = 0; i < epoch; i++) {
         for (size_t j = 0; j < size; j++) {
             loss = cost(X[j], Y[j], weight, bias);
-            grad_w = weight_grad(X[j], Y[j]);
-            grad_b = bias_grad(X[j], Y[j]);
+            grad_w = weight_grad(X[j], Y[j], weight, bias, h);
+            grad_b = bias_grad(X[j], Y[j], weight, bias, h);
 
             weight = weight - learning_rate * grad_w;
             bias = bias - learning_rate * grad_b;

@@ -18,8 +18,8 @@ By analyzing past data, the farmer notices that increasing the amount of fertili
 
 Using **Simple Linear Regression**, we can establish the mathematical relationship `Y = mX + b` where:
 
-- `Y` The dependend variable, in other words our output or prediction. (The predicted crop yield (es... kgs per hectare))
-- `X` The indipendent variabile, in other words our input. (The amount of fertilizer applied (es... kgs per hectare))
+- `Y` The dependend variable, in other words our output or prediction. (The predicted crop yield)
+- `X` The indipendent variabile, in other words our input. (The amount of fertilizer applied)
 - `m` The "slope", or how much **Y** changes for each unit of **X**. (How much the yield changes per unit of fertilizer)
 - `b` The "bias", or **Y** when **X** is 0. (The expected yield with no fertilizer)
 
@@ -27,7 +27,7 @@ By fitting the model to historical data or **Training Data**, the farmer can est
 
 ### Implementation
 
-The `predict()` function directly implements the mathematical equation of **Simple Linear Regression** `Y = mX + b`. 
+The `predict()` function directly implements the mathematical equation of **Simple Linear Regression** `Y = mX + b`.
 
 ```c
 /**
@@ -66,3 +66,58 @@ float cost(float input, float label, float weight, float bias)
     return loss / 2;
 }
 ```
+
+### Gradient Calculation
+
+To optimize our **weight** and **bias**, we use **Gradient Descent**, an iterative optimization algorithm that updates these parameters by moving them in the direction that reduces the cost function.  
+The gradients (partial derivatives) indicate how much weight and bias should be adjusted to minimize the error.
+
+The **Weight Gradient** is the derivative of the cost function with respect to the weight (**W**).  
+It measures how much the cost changes when we slightly modify the weight.
+
+```c
+/**
+ * Approximates the derivative of the cost function with respect to weight using the Finite Difference method.
+ *
+ * @param input - The input value, X.
+ * @param label - The label value, Y.
+ * @param weight - The current weight value, W.
+ * @param bias - The current bias value, B.
+ * @param h - A small value for approximation.
+ */
+float weight_grad(float input, float label, float weight, float bias, float h) 
+{
+    float cost1 = cost(input, label, weight + h, bias);
+    float cost2 = cost(input, label, weight, bias);
+    return (cost1 - cost2) / h;
+}
+```
+
+The **Bias Gradient** is the derivative of the cost function with respect to the bias (**B**).  
+It measures how much the cost changes when we slightly modify the bias.
+
+```c
+/**
+ * Approximates the derivative of the cost function with respect to bias using the Finite Difference method.
+ *
+ * @param input - The input value, X.
+ * @param label - The label value, Y.
+ * @param weight - The current weight value, W.
+ * @param bias - The current bias value, B.
+ * @param h - A small value for approximation.
+ */
+float bias_grad(float input, float label, float weight, float bias, float h)
+{
+    float cost1 = cost(input, label, weight, bias + h);
+    float cost2 = cost(input, label, weight, bias);
+    return (cost1 - cost2) / h;
+}
+```
+
+To approximate the derivates in the `weight_grad()` and the `bias_grad()` functions we use the **Finite Difference** method.  
+(More on the [Finite Difference](https://en.wikipedia.org/wiki/Finite_difference) on [Wikipedia](https://en.wikipedia.org/))
+
+### Conclusions
+
+Using **Gradients**, we update the **weight** and **bias** in each training step by the a small number, called the **Training Rate**.  
+The **Traning Rate** is a small constant that controls how big each update step is.
