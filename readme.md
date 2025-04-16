@@ -117,10 +117,9 @@ float bias_grad(float input, float label, float weight, float bias, float h)
 To approximate the derivates in the `weight_grad()` and the `bias_grad()` functions we use the **Finite Difference** method.  
 (More on the [Finite Difference](https://en.wikipedia.org/wiki/Finite_difference) on [Wikipedia](https://en.wikipedia.org/))
 
-
 ### How to get things running
 
-This project is based on the [C-Skeleton Template](https://github.com/Yami-no-karuro/C-Skeleton), please refer to the original [readme.md](https://github.com/Yami-no-karuro/C-Skeleton/blob/master/readme.md) for available commands.
+This project is based on the [C-Skeleton](https://github.com/Yami-no-karuro/C-Skeleton) template project, please refer to the original [Documentation](https://github.com/Yami-no-karuro/C-Skeleton/blob/master/readme.md) for available commands.
 
 ### Conclusions
 
