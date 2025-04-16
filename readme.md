@@ -120,7 +120,7 @@ To approximate the derivates in the `weight_grad()` and the `bias_grad()` functi
 
 ### How to get things running
 
-This project is based on the [C-Skeleton Template](https://github.com/Yami-no-karuro/C-Skeleton), please refer to the C-Skeleton [readme.md](https://github.com/Yami-no-karuro/C-Skeleton/blob/master/readme.md) for available commands.
+This project is based on the [C-Skeleton Template](https://github.com/Yami-no-karuro/C-Skeleton), please refer to the original [readme.md](https://github.com/Yami-no-karuro/C-Skeleton/blob/master/readme.md) for available commands.
 
 ### Conclusions
 
